@@ -1,0 +1,116 @@
+@font-face {
+    font-family: 'etch';
+    src: url(./fonts/MaryAteALittleLamb-po3y.ttf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+    text-decoration: none;
+    
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    height: 100vh;
+    min-width: 600px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+}
+
+header {
+    text-align: center;
+    padding: 18px;
+    background-color: brown;
+    
+}
+
+main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    justify-items: center;
+    padding: 20px;
+    background-color: burlywood;
+}
+
+ul#selectList {
+    display: flex;
+    justify-content: space-around;
+}
+
+ul#selectList li
+button {
+    appearance: none;
+    padding: 6px 18px;
+    border: 2px solid brown;
+    background-color: white;
+    
+}
+ul#selectList li
+button:hover {
+    background-color: burlywood;
+}
+
+main 
+div#gameboard {
+    padding: 0 36px;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    outline: 2px solid black;
+    align-content: center;
+    justify-items: center;
+    border-radius: 50px;
+    background-color: brown;
+    color: rgb(110, 109, 109)
+
+}
+
+main
+div#gameboard
+p.mark {
+    font-size: 3.5rem;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    color: burlywood;
+    font-family: 'etch';
+}
+
+main
+div#gameboard
+p.mark:nth-child(3n + 2) {
+    border-left: 5px groove burlywood;
+    border-right: 5px groove burlywood;
+}
+
+main
+div#gameboard
+p.mark:nth-child(1n+4) {
+    border-top: 5px groove burlywood ;
+}
+
+
+
+
+footer {
+    text-align: center;
+    padding: 16px;
+    background-color: brown;
+}
+
+footer img.github {
+    width: 32px;
+}
