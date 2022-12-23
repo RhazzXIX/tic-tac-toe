@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'etch';
-    src: url(./fonts/MaryAteALittleLamb-po3y.ttf);
+    src: url(../fonts/MaryAteALittleLamb-po3y.ttf);
 }
 *{
     margin: 0;
@@ -38,6 +38,7 @@ header {
 }
 
 main {
+    position: relative;
     display: grid;
     grid-template-rows: auto 1fr;
     justify-items: center;
@@ -64,7 +65,7 @@ button:hover {
 }
 
 main 
-div#gameboard {
+div#board {
     padding: 0 36px;
     display: grid;
     grid-template-columns: repeat(3, 100px);
@@ -74,12 +75,14 @@ div#gameboard {
     justify-items: center;
     border-radius: 50px;
     background-color: brown;
-    color: rgb(110, 109, 109)
-
+    color: rgb(110, 109, 109);
+    height: 372px;
+    width: 372px;
+    
 }
 
 main
-div#gameboard
+div#board
 p.mark {
     font-size: 3.5rem;
     text-align: center;
@@ -90,14 +93,14 @@ p.mark {
 }
 
 main
-div#gameboard
+div#board
 p.mark:nth-child(3n + 2) {
     border-left: 5px groove burlywood;
     border-right: 5px groove burlywood;
 }
 
 main
-div#gameboard
+div#board
 p.mark:nth-child(1n+4) {
     border-top: 5px groove burlywood ;
 }
