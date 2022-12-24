@@ -1,40 +1,52 @@
-(function () {
-  const Game = {
-    const players = [];
-    Player() {
-      const player = "";
-      const marker = "";
-      return { player, marker };
-    },
-
-    init() {
-      this.cacheDom();
-      this.render();
-      this.bindEvents();
-    },
-
-    cacheDom() {
-      this.gameBoard = document.querySelector("main#gameboard");
-      this.board = this.gameBoard.querySelector("div#board");
-      this.grids = this.board.querySelectorAll("p.mark");
-      this.oBtn = this.gameBoard.querySelector("button#O");
-      this.xBTn = this.gameBoard.querySelector('button#X')
-    },
-
-    bindEvents() {
-      this.grids.forEach((grid) => {
-        grid.addEventListener('click', this.playerMarks.bind(this, grid));
-      });
-    },
-
-    playerMarks (grid) {
-      grid.textContent = "X";
-    },
-
-    render() {
-      
-    },
+const Game = (function () {
+  // Add Players //
+  const players = [];
+  const Player = function (name, mark) {
+    const player = name;
+    const marker = mark;
+    let turn = "";
+    if (players.length === 0) {
+      turn = true;
+    } else {
+      turn = false;
+    }
+    if (players.length < 2) {
+      players.push({ player, marker, turn });
+    }
   };
 
-  Game.init();
+  const init = function () {
+    bindEvents();
+  };
+
+  // cache DOM//
+  const gameBoard = document.querySelector("main#gameboard");
+  const board = gameBoard.querySelector("div#board");
+  const grids = board.querySelectorAll("p.mark");
+  const oBtn = gameBoard.querySelector("button#O");
+  const xBTn = gameBoard.querySelector("button#X");
+
+  const bindEvents = function () {
+    grids.forEach((grid) => {
+      grid.addEventListener("click", playerMarks.bind(grid));
+    });
+  };
+
+  const playerMarks = function () {
+    event.stopPropagation();
+    const player = players;
+    console.log(playerTurn());
+    this.textContent = "X";
+  };
+
+  const playerTurn = function () {
+    console.log(players);
+  };
+
+  Player("Next", "X");
+  Player("Roan", "O");
+
+  init();
+
+  return { players, Player, init, bindEvents, playerMarks, playerTurn };
 })();
