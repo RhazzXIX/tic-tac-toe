@@ -13,27 +13,25 @@
       <h1>Tic-Tac-Toe</h1>
   </header>
   <main id="gameboard">
-      <div id="versus">
-          <button id="vsPlayer">Player VS Player</button>
+      <div id="versus" class="hidden">
+          <button id="vsPlayer" >Player VS Player</button>
           <!-- <button id="vsAI">Player VS A.I.</button> -->
       </div>
-      <div id="info">
+      <div id="info" class="hidden">
         <form action="" method="get" id="player-info">
-          <label for="name" id="userName-label">Player One:
+          <label for="name" id="userName">Player One:
           </label>
           <input type="text" name="playerName" id="name" required />
           <label for="selectList">Select Marker</label>
           <ul id="selectList">
-              <li>
+              <li id="markerO">
                   <button id="O" value="O">O</button>
               </li>
-              <li>
+              <li id="markerX">
                   <button id="X" value="X">X</button>
               </li>
           </ul>
         </form>
-      </div>
-      <div id="marker" class="hidden">
       </div>
       <div id="board" class="hidden">
         <p class="mark"></p>

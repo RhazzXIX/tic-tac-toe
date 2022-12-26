@@ -43,28 +43,26 @@ main#gameboard {
     grid-template-rows: 1fr;
     justify-items: center;
     align-items: center;
-    padding: 20px;
     background-color: burlywood;
 }
 
 main#gameboard 
 div#versus {
-    display: grid;
-    gap: 22px;
+  gap: 22px;
+  display: grid;
 }
 
 main#gameboard
 div#versus 
 button {
-    appearance: none;
-    padding: 6px 18px;
+  padding: 6px 18px;
+  appearance: none;
 }
 
 
-
 ul#selectList {
-    display: flex;
-    justify-content: space-around;
+  justify-content: space-around;
+  display: flex;
 }
 
 main#gameboard
@@ -93,67 +91,66 @@ label:nth-of-type(2) {
 
 ul#selectList li
 button {
-    appearance: none;
-    padding: 6px 18px;
-    border: 2px solid brown;
-    background-color: white;
+  appearance: none;
+  padding: 6px 18px;
+  border: 2px solid brown;
+  background-color: white;
     
 }
 ul#selectList li
 button:hover {
-    background-color: burlywood;
+  background-color: burlywood;
 }
 
 main 
 div#board {
-    padding: 0 36px;
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    outline: 2px solid black;
-    align-content: center;
-    justify-items: center;
-    border-radius: 50px;
-    background-color: brown;
-    color: rgb(110, 109, 109);
-    height: 372px;
-    width: 372px;
-    
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  padding: 0 36px;
+  outline: 2px solid black;
+  grid-template-rows: repeat(3, 100px);
+  justify-items: center;
+  border-radius: 50px;
+  background-color: brown;
+  color: rgb(110, 109, 109);
+  height: 372px;
+  width: 372px;
+  align-content: center;
 }
 
 main
 div#board
 p.mark {
-    font-size: 3.5rem;
-    text-align: center;
-    width: 100px;
-    height: 100px;
-    color: burlywood;
-    font-family: 'etch';
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  color: burlywood;
+  font-family: 'etch';
+  font-size: 3.5rem;
 }
 
 main
 div#board
 p.mark:nth-child(3n + 2) {
-    border-left: 5px groove burlywood;
-    border-right: 5px groove burlywood;
+  border-right: 5px groove burlywood;
+  border-left: 5px groove burlywood;
 }
 
 main
 div#board
 p.mark:nth-child(1n+4) {
-    border-top: 5px groove burlywood ;
+  border-top: 5px groove burlywood ;
 }
 
 
 footer {
-    text-align: center;
-    padding: 16px;
-    background-color: brown;
+  padding: 16px;
+  background-color: brown;
+  text-align: center;
 }
 
 footer img.github {
-    width: 32px;
+  width: 32px;
 }
 
 .hidden {
