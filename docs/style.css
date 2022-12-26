@@ -37,19 +37,59 @@ header {
     
 }
 
-main {
+main#gameboard {
     position: relative;
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr;
     justify-items: center;
+    align-items: center;
     padding: 20px;
     background-color: burlywood;
 }
+
+main#gameboard 
+div#versus {
+    display: grid;
+    gap: 22px;
+}
+
+main#gameboard
+div#versus 
+button {
+    appearance: none;
+    padding: 6px 18px;
+}
+
+
 
 ul#selectList {
     display: flex;
     justify-content: space-around;
 }
+
+main#gameboard
+form#player-info {
+  display: grid;
+}
+
+main#gameboard
+form#player-info
+input[type='text']{
+  margin-top: 2px;
+  appearance: none;
+  padding: 4px 2px;
+  border-radius: 6px;
+  border: 2px solid brown;
+}
+
+main#gameboard
+form#player-info
+label:nth-of-type(2) {
+  margin-top: 20px;;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
 
 ul#selectList li
 button {
@@ -106,8 +146,6 @@ p.mark:nth-child(1n+4) {
 }
 
 
-
-
 footer {
     text-align: center;
     padding: 16px;
@@ -116,4 +154,8 @@ footer {
 
 footer img.github {
     width: 32px;
+}
+
+.hidden {
+  opacity: 0;
 }

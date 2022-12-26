@@ -25,6 +25,9 @@ const Game = (function () {
   const grids = board.querySelectorAll("p.mark");
   const oBtn = gameBoard.querySelector("button#O");
   const xBTn = gameBoard.querySelector("button#X");
+  const selectMarker = gameBoard.querySelector("div#marker");
+  const selectPlayers = gameBoard.querySelector("div#players");
+  const selectVersus = gameBoard.querySelector('div#versus')
 
   const bindEvents = function () {
     grids.forEach((grid) => {
@@ -47,6 +50,9 @@ const Game = (function () {
   Player("Roan", "O");
 
   init();
+  gameBoard.removeChild(board);
+  gameBoard.removeChild(selectMarker);
+  gameBoard.removeChild(selectVersus);
 
   return { players, Player, init, bindEvents, playerMarks, playerTurn };
 })();

@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="./style.css" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="./style.css" />
     <script src="./java.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Tic-Tac-Toe</h1>
-    </header>
-    <main id="gameboard">
-        <div id="select">
-            <h2>Select Marker</h2>
-            <ul id="selectList">
-                <li>
-                    <button id="O">O</button>
-                </li>
-                <li>
-                    <button id="X">X</button>
-                </li>
-            </ul>
-        </div>
-        <div id="board">
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-            <p class="mark"></p>
-        </div>
+  <header>
+      <h1>Tic-Tac-Toe</h1>
+  </header>
+  <main id="gameboard">
+      <div id="versus">
+          <button id="vsPlayer">Player VS Player</button>
+          <!-- <button id="vsAI">Player VS A.I.</button> -->
+      </div>
+      <div id="info">
+        <form action="" method="get" id="player-info">
+          <label for="name" id="userName-label">Player One:
+          </label>
+          <input type="text" name="playerName" id="name" required />
+          <label for="selectList">Select Marker</label>
+          <ul id="selectList">
+              <li>
+                  <button id="O" value="O">O</button>
+              </li>
+              <li>
+                  <button id="X" value="X">X</button>
+              </li>
+          </ul>
+        </form>
+      </div>
+      <div id="marker" class="hidden">
+      </div>
+      <div id="board" class="hidden">
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+        <p class="mark"></p>
+      </div>
 
-    </main>
-    <footer>
-        <a href="https://github.com/RhazzXIX">
-            <img class="github" src="../images/GitHub-Mark-64px.png" alt="Github Logo">
-        </a>
-    </footer>
+  </main>
+  <footer>
+      <a href="https://github.com/RhazzXIX">
+          <img class="github" src="../images/GitHub-Mark-64px.png" alt="Github Logo">
+      </a>
+  </footer>
     
 </body>
 </html>
