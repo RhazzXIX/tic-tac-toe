@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 :root {
@@ -40,9 +41,9 @@ header {
 main#gameboard {
     position: relative;
     display: grid;
-    grid-template-rows: 1fr;
-    justify-items: center;
+    grid-template-rows: auto auto;
     align-items: center;
+    justify-items: center;
     background-color: burlywood;
 }
 
@@ -57,7 +58,10 @@ div#versus
 button {
   padding: 6px 18px;
   appearance: none;
+  width: max-content;
+  height: max-content;
 }
+
 
 
 ul#selectList {
@@ -102,8 +106,17 @@ button:hover {
   background-color: burlywood;
 }
 
-main 
+main
 div#board {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+}
+
+
+
+div#board
+div#grid {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   padding: 0 36px;
@@ -118,8 +131,8 @@ div#board {
   align-content: center;
 }
 
-main
 div#board
+div#grid
 p.mark {
   text-align: center;
   width: 100px;
@@ -129,15 +142,15 @@ p.mark {
   font-size: 3.5rem;
 }
 
-main
 div#board
+div#grid
 p.mark:nth-child(3n + 2) {
   border-right: 5px groove burlywood;
   border-left: 5px groove burlywood;
 }
 
-main
 div#board
+div#grid
 p.mark:nth-child(1n+4) {
   border-top: 5px groove burlywood ;
 }

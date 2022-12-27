@@ -44,6 +44,7 @@ const Game = (function () {
   const userLabel = playerForm.querySelector("label#userName");
   const listMarkerO = markerList.querySelector("li#markerO");
   const listMarkerX = markerList.querySelector("li#markerX");
+  const indicator = gameBoard.querySelector("h2#indication");
 
   const bindEvents = function () {
     PVPBtn.addEventListener("click", (e) => {
@@ -54,9 +55,9 @@ const Game = (function () {
     grids.forEach((grid) => {
       grid.addEventListener("click", playerMarks.bind(grid));
     });
-    playerForm.addEventListener('submit', (e) => {
+    playerForm.addEventListener("submit", (e) => {
       event.preventDefault();
-    })
+    });
     markerO.addEventListener("click", (e) => {
       e.stopPropagation();
       if (nameInput.value) {
@@ -73,36 +74,51 @@ const Game = (function () {
 
   const inputPlayers = function (name, marker) {
     if (players.length === 0) {
-      Player(name, marker);
+      Player(name, marker.value);
       userLabel.textContent = "Player Two:";
       nameInput.value = "";
       if (marker.value === "O") {
-        console.log(marker.value);
         markerList.removeChild(listMarkerO);
       } else if (marker.value === "X") {
-        console.log(marker.value);
         markerList.removeChild(listMarkerX);
       }
     } else if (players.length === 1) {
-      Player(name, marker);
+      Player(name, marker.value);
       gameBoard.removeChild(playerInfo);
       gameBoard.appendChild(board);
       event.preventDefault();
+
+      players.forEach((player) => {
+        if (player.turn === true) {
+          indicator.textContent = `Player ${player.player}'s turn`;
+        }
+      });
     }
   };
 
   const playerMarks = function () {
     event.stopPropagation();
-    const player = players;
-    console.log(playerTurn());
-    this.textContent = "X";
+    if (Boolean(this.textContent) === false) {
+      this.textContent = `${playerTurn()}`;
+    }
   };
 
   const playerTurn = function () {
-    console.log(players);
+    let marker;
+    let name;
+    players.map((user) => {
+      if (user.turn === true) {
+        marker = user.marker;
+        user.turn = false;
+      } else if (user.turn === false) {
+        user.turn = true;
+        name = user.player;
+      }
+    });
+    indicator.textContent = `Player ${name}'s turn`;
+
+    return marker;
   };
 
   init();
-
-  return { players, Player, init, bindEvents, playerMarks, playerTurn };
 })();
