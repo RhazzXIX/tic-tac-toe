@@ -21,9 +21,11 @@ const Game = (function () {
     bindEvents();
     gameBoard.removeChild(board);
     gameBoard.removeChild(playerInfo);
+    gameBoard.removeChild(announcement);
     selectVersus.classList.toggle("hidden");
     playerInfo.classList.toggle("hidden");
     board.classList.toggle("hidden");
+    announcement.classList.toggle("hidden");
   };
 
   // cache DOM//
@@ -53,6 +55,9 @@ const Game = (function () {
   const col3 = Array.from(board.querySelectorAll("p.col3"));
   const diag1 = Array.from(board.querySelectorAll("p.diag1"));
   const diag2 = Array.from(board.querySelectorAll("p.diag2"));
+  const announcement = gameBoard.querySelector("section#announce");
+  const restartBtn = announcement.querySelector('button#restart');
+  console.log(restartBtn);
 
   const bindEvents = function () {
     PVPBtn.addEventListener("click", (e) => {
@@ -78,6 +83,10 @@ const Game = (function () {
         inputPlayers(nameInput.value, markerX);
       }
     });
+    restartBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.reload();
+    })
   };
 
   const inputPlayers = function (name, marker) {
@@ -132,78 +141,77 @@ const Game = (function () {
   const checkBoard = function () {
     switch (true) {
       case row1.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
-      case row1.every((grid) => grid.textContent === "O") :
-        console.log('winner');
+      case row1.every((grid) => grid.textContent === "O"):
+        console.log("winner");
         announceWinner("O");
         break;
       case row2.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
       case row2.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
       case row3.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
       case row3.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
       case col1.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
       case col1.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
-      case col2.every((grid) => grid.textContent === "X"): 
-        console.log('winner');
+      case col2.every((grid) => grid.textContent === "X"):
+        console.log("winner");
         announceWinner("X");
         break;
       case col2.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
       case col3.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
       case col3.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
       case diag1.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
       case diag1.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
       case diag2.every((grid) => grid.textContent === "X"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("X");
         break;
       case diag2.every((grid) => grid.textContent === "O"):
-        console.log('winner');
+        console.log("winner");
         announceWinner("O");
         break;
       default:
-        noOfTurn++
-        announceWinner('draw');
-      };
+        noOfTurn++;
+        // announceWinner("draw");
+    }
   };
 
   const announceWinner = function (mark) {
-
-  }
-
+    gameBoard.appendChild(announcement);
+  };
   init();
 })();

@@ -155,6 +155,17 @@ p.mark:nth-child(1n+4) {
   border-top: 5px groove burlywood ;
 }
 
+section#announce {
+  position: absolute;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: space-evenly;
+  justify-items: center;
+}
+
 
 footer {
   padding: 16px;
