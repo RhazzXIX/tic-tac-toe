@@ -2,6 +2,7 @@ const Game = (function () {
   // Add Players //
 
   const players = [];
+  let noOfTurn = 0;
   const Player = function (name, mark) {
     const player = name;
     const marker = mark;
@@ -39,12 +40,19 @@ const Game = (function () {
   const markerO = playerForm.querySelector("button#O");
   const markerX = playerForm.querySelector("button#X");
   const nameInput = playerForm.querySelector("input#name");
-  // const listLabel = playerForm.querySelector('label[for=selectList]');
   const markerList = playerForm.querySelector("ul#selectList");
   const userLabel = playerForm.querySelector("label#userName");
   const listMarkerO = markerList.querySelector("li#markerO");
   const listMarkerX = markerList.querySelector("li#markerX");
   const indicator = gameBoard.querySelector("h2#indication");
+  const row1 = Array.from(board.querySelectorAll("p.row1"));
+  const row2 = Array.from(board.querySelectorAll("p.row2"));
+  const row3 = Array.from(board.querySelectorAll("p.row3"));
+  const col1 = Array.from(board.querySelectorAll("p.col1"));
+  const col2 = Array.from(board.querySelectorAll("p.col2"));
+  const col3 = Array.from(board.querySelectorAll("p.col3"));
+  const diag1 = Array.from(board.querySelectorAll("p.diag1"));
+  const diag2 = Array.from(board.querySelectorAll("p.diag2"));
 
   const bindEvents = function () {
     PVPBtn.addEventListener("click", (e) => {
@@ -100,6 +108,7 @@ const Game = (function () {
     event.stopPropagation();
     if (Boolean(this.textContent) === false) {
       this.textContent = `${playerTurn()}`;
+      checkBoard(this);
     }
   };
 
@@ -119,6 +128,82 @@ const Game = (function () {
 
     return marker;
   };
+
+  const checkBoard = function () {
+    switch (true) {
+      case row1.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case row1.every((grid) => grid.textContent === "O") :
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case row2.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case row2.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case row3.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case row3.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case col1.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case col1.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case col2.every((grid) => grid.textContent === "X"): 
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case col2.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case col3.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case col3.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case diag1.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case diag1.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      case diag2.every((grid) => grid.textContent === "X"):
+        console.log('winner');
+        announceWinner("X");
+        break;
+      case diag2.every((grid) => grid.textContent === "O"):
+        console.log('winner');
+        announceWinner("O");
+        break;
+      default:
+        noOfTurn++
+        announceWinner('draw');
+      };
+  };
+
+  const announceWinner = function (mark) {
+
+  }
 
   init();
 })();
