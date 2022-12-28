@@ -56,8 +56,8 @@ const Game = (function () {
   const diag1 = Array.from(board.querySelectorAll("p.diag1"));
   const diag2 = Array.from(board.querySelectorAll("p.diag2"));
   const announcement = gameBoard.querySelector("section#announce");
-  const restartBtn = announcement.querySelector('button#restart');
-  console.log(restartBtn);
+  const restartBtn = announcement.querySelector("button#restart");
+  const winnerText = announcement.querySelector("h2#winner");
 
   const bindEvents = function () {
     PVPBtn.addEventListener("click", (e) => {
@@ -83,10 +83,10 @@ const Game = (function () {
         inputPlayers(nameInput.value, markerX);
       }
     });
-    restartBtn.addEventListener('click', (e) => {
+    restartBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       window.location.reload();
-    })
+    });
   };
 
   const inputPlayers = function (name, marker) {
@@ -206,12 +206,26 @@ const Game = (function () {
         break;
       default:
         noOfTurn++;
-        // announceWinner("draw");
+        if (noOfTurn === 9) {
+          announceWinner("draw");
+        }
     }
   };
 
   const announceWinner = function (mark) {
-    gameBoard.appendChild(announcement);
+    let winner;
+    if (mark !== "draw") {
+      players.forEach((player) => {
+        if (player.marker === mark) {
+          winner = player.player;
+        }
+        gameBoard.appendChild(announcement);
+        winnerText.textContent = `The winner is ${winner}`;
+      });
+    } else {
+      gameBoard.appendChild(announcement);
+      winnerText.textContent = `It's a draw!`;
+    }
   };
   init();
 })();
