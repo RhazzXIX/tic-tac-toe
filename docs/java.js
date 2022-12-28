@@ -214,6 +214,7 @@ const Game = (function () {
 
   const announceWinner = function (mark) {
     let winner;
+    indicator.textContent = '';
     if (mark !== "draw") {
       players.forEach((player) => {
         if (player.marker === mark) {
