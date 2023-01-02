@@ -1,113 +1,226 @@
-const Game = (function () {
+// const Game = (function () {
   // Add Players //
+  const DOM = (function () {
+    const gameBoard = document.querySelector("main#gameboard");
+    const board = gameBoard.querySelector('div#board');
+    const oBtn = gameBoard.querySelector("button#O");
+    const xBtn = gameBoard.querySelector("button#X");
+    const playerInfo = gameBoard.querySelector("div#info");
+    const selectPlayers = gameBoard.querySelector("div#players");
+    const PVPBtn = gameBoard.querySelector("#vsPlayer");
+    const playerForm = playerInfo.querySelector("form#player-info");
+    const markerO = playerForm.querySelector("button#O");
+    const markerX = playerForm.querySelector("button#X");
+    const nameInput = playerForm.querySelector("input#name");
+    const markerList = playerForm.querySelector("ul#selectList");
+    const userLabel = playerForm.querySelector("label#userName");
+    const listMarkerO = markerList.querySelector("li#markerO");
+    const listMarkerX = markerList.querySelector("li#markerX");
+    const indicator = gameBoard.querySelector("h2#indication");
+    const announcement = gameBoard.querySelector("section#announce");
+    const restartBtn = announcement.querySelector("button#restart");
+    const winnerText = announcement.querySelector("h2#winner");
+    const selectVersus = gameBoard.querySelector("div#versus");
 
-  const players = [];
-  let noOfTurn = 0;
-  const Player = function (name, mark) {
-    const player = name;
-    const marker = mark;
-    let turn = "";
-    if (players.length === 0) {
-      turn = true;
-    } else {
-      turn = false;
-    }
-    if (players.length < 2) {
-      players.push({ player, marker, turn });
-    }
-  };
+    return {
+      gameBoard, 
+      board,
+      oBtn, 
+      xBtn, 
+      selectPlayers, 
+      PVPBtn,
+      markerO,
+      markerX,
+      playerInfo,
+      announcement,
+      nameInput,
+      userLabel,
+      listMarkerO,
+      listMarkerX,
+      indicator,
+      restartBtn,
+      winnerText,
+      selectVersus,
+      playerForm,
+      markerList,
+      }
+
+  }) ();
+  console.log (DOM);
+
+
+  const GameBoard = (function () {
+    const panels = [];
+    const row1 = [];
+    const row2 = [];
+    const row3 = [];
+    const col1 = [];
+    const col2 = [];
+    const col3 = [];
+    const diag1 = [];
+    const diag2 = [];
+    for (let i = 1; i <= 9; i++) {
+      const panel = document.createElement('div')
+      switch (i) {
+        case 1: 
+          row1.push(panel);
+          col1.push(panel);
+          diag1.push(panel);
+          panel.setAttribute('data-row', 1);
+          panel.setAttribute('data-col', 1);
+          panel.setAttribute('data-diag', 1);
+          break
+        case 2: 
+          row1.push(panel);
+          col2.push(panel);
+          panel.setAttribute('data-row', 1);
+          panel.setAttribute('data-col', 2);
+          break
+        case 3:
+          row1.push(panel);
+          col3.push(panel);
+          diag2.push(panel);
+          panel.setAttribute('data-row', 1);
+          panel.setAttribute('data-col', 3);
+          panel.setAttribute('data-diag', 2);
+          break
+        case 4:
+          row2.push(panel);
+          col1.push(panel);
+          panel.setAttribute('data-row', 2);
+          panel.setAttribute('data-col', 1);          
+          break
+        case 5:
+          row2.push(panel);
+          col2.push(panel);
+          diag1.push(panel);
+          diag2.push(panel);
+          panel.setAttribute('data-row', 2);
+          panel.setAttribute('data-col', 2);
+          panel.setAttribute('data-diag', 3);
+          break;
+        case 6:
+          row2.push(panel);
+          col3.push(panel);
+          panel.setAttribute('data-row', 2);
+          panel.setAttribute('data-col', 3);
+          break;
+        case 7:
+          row3.push(panel);
+          col1.push(panel);
+          diag2.push(panel);
+          panel.setAttribute('data-row', 3);
+          panel.setAttribute('data-col', 1);
+          panel.setAttribute('data-diag', 2);
+          break;
+        case 8:
+          row3.push(panel);
+          col2.push(panel);
+          panel.setAttribute('data-row', 3);
+          panel.setAttribute('data-col', 2);
+          break;
+        default:
+          row3.push(panel);
+          col3.push(panel);
+          diag1.push(panel);
+          panel.setAttribute('data-row', 3);
+          panel.setAttribute('data-col', 3);
+          panel.setAttribute('data-diag', 2);
+          break;
+      }
+      panel.classList.add('mark');
+      panels.push(panel);
+    };
+    const mat = document.createElement('div');
+    mat.setAttribute('id', 'grid')
+    DOM.board.appendChild(mat);
+    panels.forEach((panel) => {
+      mat.appendChild(panel);
+    })
+    return  { panels, row1, row2, row3, col1, col2, col3, diag1, diag2, } ;
+  }) ();
+
+  const noOfTurn = 0;
+  const gamers = (function () {
+    const players = [];
+    const Player = function (name, marker) {
+      let turn = "";
+      if (players.length === 0) {
+        turn = true;
+      } else {
+        turn = false;
+      }
+      if (players.length < 2) {
+        players.push({ name, marker, turn });
+      }
+    };
+    return {players, Player}
+  }) () ;
+  
 
   const init = function () {
     bindEvents();
-    gameBoard.removeChild(board);
-    gameBoard.removeChild(playerInfo);
-    gameBoard.removeChild(announcement);
-    selectVersus.classList.toggle("hidden");
-    playerInfo.classList.toggle("hidden");
-    board.classList.toggle("hidden");
-    announcement.classList.toggle("hidden");
+    DOM.gameBoard.removeChild(DOM.board);
+    DOM.gameBoard.removeChild(DOM.playerInfo);
+    DOM.gameBoard.removeChild(DOM.announcement);
+    DOM.selectVersus.classList.toggle("hidden");
+    DOM.playerInfo.classList.toggle("hidden");
+    DOM.board.classList.toggle("hidden");
+    DOM.announcement.classList.toggle("hidden");
   };
 
-  // cache DOM//
-  const gameBoard = document.querySelector("main#gameboard");
-  const board = gameBoard.querySelector("div#board");
-  const grids = board.querySelectorAll("p.mark");
-  const oBtn = gameBoard.querySelector("button#O");
-  const xBTn = gameBoard.querySelector("button#X");
-  const playerInfo = gameBoard.querySelector("div#info");
-  const selectPlayers = gameBoard.querySelector("div#players");
-  const selectVersus = gameBoard.querySelector("div#versus");
-  const PVPBtn = gameBoard.querySelector("#vsPlayer");
-  const playerForm = playerInfo.querySelector("form#player-info");
-  const markerO = playerForm.querySelector("button#O");
-  const markerX = playerForm.querySelector("button#X");
-  const nameInput = playerForm.querySelector("input#name");
-  const markerList = playerForm.querySelector("ul#selectList");
-  const userLabel = playerForm.querySelector("label#userName");
-  const listMarkerO = markerList.querySelector("li#markerO");
-  const listMarkerX = markerList.querySelector("li#markerX");
-  const indicator = gameBoard.querySelector("h2#indication");
-  const row1 = Array.from(board.querySelectorAll("p.row1"));
-  const row2 = Array.from(board.querySelectorAll("p.row2"));
-  const row3 = Array.from(board.querySelectorAll("p.row3"));
-  const col1 = Array.from(board.querySelectorAll("p.col1"));
-  const col2 = Array.from(board.querySelectorAll("p.col2"));
-  const col3 = Array.from(board.querySelectorAll("p.col3"));
-  const diag1 = Array.from(board.querySelectorAll("p.diag1"));
-  const diag2 = Array.from(board.querySelectorAll("p.diag2"));
-  const announcement = gameBoard.querySelector("section#announce");
-  const restartBtn = announcement.querySelector("button#restart");
-  const winnerText = announcement.querySelector("h2#winner");
+
 
   const bindEvents = function () {
-    PVPBtn.addEventListener("click", (e) => {
+    DOM.PVPBtn.addEventListener("click", (e) => {
       e.stopPropagation();
-      gameBoard.removeChild(selectVersus);
-      gameBoard.appendChild(playerInfo);
+      DOM.gameBoard.removeChild(DOM.selectVersus);
+      DOM.gameBoard.appendChild(DOM.playerInfo);
     });
-    grids.forEach((grid) => {
-      grid.addEventListener("click", playerMarks.bind(grid));
+    GameBoard.panels.forEach((panel) => {
+      panel.addEventListener("click", playerMarks.bind(panel));
     });
-    playerForm.addEventListener("submit", (e) => {
+    DOM.playerForm.addEventListener("submit", (e) => {
+      e.stopPropagation();
       event.preventDefault();
     });
-    markerO.addEventListener("click", (e) => {
+    DOM.markerO.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (nameInput.value) {
-        inputPlayers(nameInput.value, markerO);
+      if (DOM.nameInput.value) {
+        inputPlayers(DOM.nameInput.value, DOM.markerO);
       }
     });
-    markerX.addEventListener("click", (e) => {
+    DOM.markerX.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (nameInput.value) {
-        inputPlayers(nameInput.value, markerX);
+      if (DOM.nameInput.value) {
+        inputPlayers(DOM.nameInput.value, DOM.markerX);
       }
     });
-    restartBtn.addEventListener("click", (e) => {
+    DOM.restartBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       window.location.reload();
     });
   };
 
   const inputPlayers = function (name, marker) {
-    if (players.length === 0) {
-      Player(name, marker.value);
-      userLabel.textContent = "Player Two:";
-      nameInput.value = "";
+    if (gamers.players.length === 0) {
+      gamers.Player(name, marker.value);
+      DOM.userLabel.textContent = "Player Two:";
+      DOM.nameInput.value = "";
       if (marker.value === "O") {
-        markerList.removeChild(listMarkerO);
+        DOM.markerList.removeChild(DOM.listMarkerO);
       } else if (marker.value === "X") {
-        markerList.removeChild(listMarkerX);
+        DOM.markerList.removeChild(DOM.listMarkerX);
       }
-    } else if (players.length === 1) {
-      Player(name, marker.value);
-      gameBoard.removeChild(playerInfo);
-      gameBoard.appendChild(board);
+    } else if (gamers.players.length === 1) {
+      gamers.Player(name, marker.value);
+      DOM.gameBoard.removeChild(DOM.playerInfo);
+      DOM.gameBoard.appendChild(DOM.board);
       event.preventDefault();
 
-      players.forEach((player) => {
+      gamers.players.forEach((player) => {
         if (player.turn === true) {
-          indicator.textContent = `Player ${player.player}'s turn`;
+          DOM.indicator.textContent = `Player ${player.name}'s turn`;
         }
       });
     }
@@ -124,16 +237,18 @@ const Game = (function () {
   const playerTurn = function () {
     let marker;
     let name;
-    players.map((user) => {
-      if (user.turn === true) {
-        marker = user.marker;
-        user.turn = false;
-      } else if (user.turn === false) {
-        user.turn = true;
-        name = user.player;
+    gamers.players.map((user) => {
+      const gamer = user;
+      if (gamer.turn === true) {
+        marker = gamer.marker;
+        gamer.turn = false;
+      } else if (gamer.turn === false) {
+        gamer.turn = true;
+        name = gamer.name;
       }
+      
     });
-    indicator.textContent = `Player ${name}'s turn`;
+    DOM.indicator.textContent = `Player ${name}'s turn`;
 
     return marker;
   };
@@ -212,21 +327,21 @@ const Game = (function () {
     }
   };
 
-  const announceWinner = function (mark) {
-    let winner;
-    indicator.textContent = '';
-    if (mark !== "draw") {
-      players.forEach((player) => {
-        if (player.marker === mark) {
-          winner = player.player;
-        }
-        gameBoard.appendChild(announcement);
-        winnerText.textContent = `The winner is ${winner}`;
-      });
-    } else {
-      gameBoard.appendChild(announcement);
-      winnerText.textContent = `It's a draw!`;
-    }
-  };
+  // const announceWinner = function (mark) {
+  //   let winner;
+  //   indicator.textContent = '';
+  //   if (mark !== "draw") {
+  //     players.forEach((player) => {
+  //       if (player.marker === mark) {
+  //         winner = player.player;
+  //       }
+  //       gameBoard.appendChild(announcement);
+  //       winnerText.textContent = `The winner is ${winner}`;
+  //     });
+  //   } else {
+  //     gameBoard.appendChild(announcement);
+  //     winnerText.textContent = `It's a draw!`;
+  //   }
+  // };
   init();
-})();
+// })();

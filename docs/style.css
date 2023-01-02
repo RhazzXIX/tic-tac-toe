@@ -133,7 +133,7 @@ div#grid {
 
 div#board
 div#grid
-p.mark {
+div.mark {
   text-align: center;
   width: 100px;
   height: 100px;
@@ -142,16 +142,17 @@ p.mark {
   font-size: 3.5rem;
 }
 
+
 div#board
 div#grid
-p.mark:nth-child(3n + 2) {
+div.mark:nth-child(3n + 2) {
   border-right: 5px groove burlywood;
   border-left: 5px groove burlywood;
 }
 
 div#board
 div#grid
-p.mark:nth-child(1n+4) {
+div.mark:nth-child(1n+4) {
   border-top: 5px groove burlywood ;
 }
 
